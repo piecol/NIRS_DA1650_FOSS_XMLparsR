@@ -5,10 +5,10 @@ XML to dataframe parser written in R
 
 Required libraries are: 
 
--**tidyverse**
+- **tidyverse**
 
--**xml2**
+- **xml2**
 
--**lubridate*
+- **lubridate**
 
 The script parses any .XML file located in the DATA folder and returns a dataframe. The aim is to get the samples located in the SampleList node and theri relative metadata.
