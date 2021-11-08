@@ -1,11 +1,9 @@
-#https://stackoverflow.com/questions/9564489/read-all-files-in-a-folder-and-apply-a-function-to-each-data-frame
-
 library(tidyverse)
 library(lubridate)
 library(xml2)
 
 
-# get samplse from USB export from DA1650, if many samples are exported, the instruments splits chunks of ~100 samples 
+# get samples to USB export from DA1650; if many samples are exported, the instrument splits chunks of ~100 samples in separate XMLs
 
 dir_path <- "DATA/Samples_91751846_02-11-2021_02-36-03/" 
 file_pattern <- '.XML' 
@@ -21,14 +19,14 @@ read_dir <- function(dir_path, file_name){
 
 rawFOSS <- 
   list.files(dir_path, pattern = file_pattern) %>% 
-  map_df(~ read_dir(dir_path, .)) # depending on file(s) size, this operation takes a few minutes - be patient !
+  map_df(~ read_dir(dir_path, .)) # depending on file(s) size, this operation might take a few minutes - be patient !
 
 rm(list=c("dir_path", "file_pattern", "read_dir"))
 
 FOSS_EXT = rawFOSS %>% 
   select(AnalysisEndUTC, AnalysisStartUTC, SampleNumber, SampleID, # select relevant information 
          ProductCode, ProductName,Value,Name,Identification ) %>% 
-  mutate_at(1:2, ~ as_datetime(.,"%Y-%m-%dT%H:%M:%S", tz="UTC")) %>% #format_ISO8601(date1)
+  mutate_at(1:2, ~ as_datetime(.,"%Y-%m-%dT%H:%M:%S", tz="UTC")) %>% #format_ISO8601(date)
   filter(!Name %in% c("Cup id", "Cup type", "Distance")) %>% 
   fill(AnalysisEndUTC:ProductName) %>%
   filter(!is.na(Name)) %>% 
