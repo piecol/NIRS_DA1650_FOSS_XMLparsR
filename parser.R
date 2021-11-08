@@ -5,8 +5,10 @@ library(lubridate)
 library(xml2)
 
 
-dir_path <- "DATA/Samples_91751846_02-11-2021_02-36-03/"
-file_pattern <- '.XML' # regex pattern to match the file name format
+# get samplse from USB export from DA1650, if many samples are exported, the instruments splits chunks of ~100 samples 
+
+dir_path <- "DATA/Samples_91751846_02-11-2021_02-36-03/" 
+file_pattern <- '.XML' 
 
 #list.files(dir_path, file_pattern)
 
