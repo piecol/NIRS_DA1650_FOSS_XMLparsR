@@ -1,7 +1,7 @@
 # NIRS_DA1650_FOSS_XMLparsR
 XML to dataframe parser written in R
 
-## Store your XMLs in the DATA folder in your project
+## Store your XMLs in the DATA folder of your project
 
 Required libraries are: 
 
