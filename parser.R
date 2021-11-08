@@ -19,12 +19,12 @@ read_dir <- function(dir_path, file_name){
 
 rawFOSS <- 
   list.files(dir_path, pattern = file_pattern) %>% 
-  map_df(~ read_dir(dir_path, .))
+  map_df(~ read_dir(dir_path, .)) # depending on file(s) size, this operation takes a few minutes - be patient !
 
 rm(list=c("dir_path", "file_pattern", "read_dir"))
 
 FOSS_EXT = rawFOSS %>% 
-  select(AnalysisEndUTC, AnalysisStartUTC, SampleNumber, SampleID, 
+  select(AnalysisEndUTC, AnalysisStartUTC, SampleNumber, SampleID, # select relevant information 
          ProductCode, ProductName,Value,Name,Identification ) %>% 
   mutate_at(1:2, ~ as_datetime(.,"%Y-%m-%dT%H:%M:%S", tz="UTC")) %>% #format_ISO8601(date1)
   filter(!Name %in% c("Cup id", "Cup type", "Distance")) %>% 
