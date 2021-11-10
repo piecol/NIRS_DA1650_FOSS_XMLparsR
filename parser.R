@@ -1,7 +1,10 @@
+# USEFUL LINKS
+# https://stackoverflow.com/questions/9564489/read-all-files-in-a-folder-and-apply-a-function-to-each-data-frame
+# https://stackoverflow.com/questions/51026684/create-a-data-frame-in-r-from-many-xml-files
+
 library(tidyverse)
 library(lubridate)
 library(xml2)
-
 
 # get samples to USB export from DA1650; if many samples are exported, the instrument splits chunks of ~100 samples in separate XMLs
 
